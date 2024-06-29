@@ -1,4 +1,6 @@
-from .banner import *
+
 from .base import *
-from .social import *
 from .about import *
+from .category import *
+from .header import *
+from .service import *

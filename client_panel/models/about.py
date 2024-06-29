@@ -10,9 +10,9 @@ class About(BaseModel):
     description1 = models.CharField(max_length=255)
     experiences_detail = RichTextUploadingField()
 
-class Experience(BaseModel):
-    about_info = models.ForeignKey(About, related_name='experiences', on_delete=models.CASCADE)
+
 
 class Certificate(BaseModel):
-    # Define your fields here
-    pass
+    image= models.ImageField(upload_to="sertificate/image")
+
+    
