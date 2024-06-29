@@ -37,8 +37,10 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'ckeditor',
-    'ckeditor_uploader'
-    # 'rest_framework'   isntall qilinadigan applar shuni ichiga yoziladi 
+    'ckeditor_uploader',
+    'rest_framework',
+    'drf_yasg',
+    'corsheaders',
 
 ]
 
@@ -51,7 +53,15 @@ INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 AUTH_USER_MODEL = 'client_panel.User'
 
 
-MIDDLEWARE = [
+
+CORS_MIDDLEWARE=[
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+DJANGO_MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,6 +70,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+MIDDLEWARE = CORS_MIDDLEWARE + DJANGO_MIDDLEWARE
 
 
 ROOT_URLCONF = 'core.urls'
