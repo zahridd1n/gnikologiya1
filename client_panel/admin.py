@@ -1,3 +1,5 @@
 from django.contrib import admin
-from .models import about
+from .models import *
+
 admin.site.register(about.About)
+admin.site.register(user.User)
