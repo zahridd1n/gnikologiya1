@@ -37,7 +37,10 @@ DJANGO_APPS=[
     'django.contrib.staticfiles',
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    # 'rest_framework'   isntall qilinadigan applar shuni ichiga yoziladi 
+    
+]
 
 
 CUSTOM_APPS=[
