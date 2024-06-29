@@ -10,4 +10,7 @@ class About(BaseModel):
 
 class Experience(BaseModel):
     about = models.ForeignKey(About, related_name='experiences', on_delete=models.CASCADE)
-    
+
+
+class Certificate(BaseModel):
+    image
