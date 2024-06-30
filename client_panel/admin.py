@@ -20,7 +20,7 @@ class PodCategoryAdmin(admin.ModelAdmin):
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'content', 'image', 'video_link']
+    list_display = ['title', 'parent', 'sub_category']
 
 
 class CalendarAdmin(admin.ModelAdmin):
