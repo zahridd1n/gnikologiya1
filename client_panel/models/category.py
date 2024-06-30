@@ -43,16 +43,18 @@ class Article(models.Model):
     image1 = models.ImageField(upload_to="content/images/", blank=True, null=True, verbose_name="Rasm")
     image2 = models.ImageField(upload_to="content/images/", blank=True, null=True, verbose_name="Rasm")
     image3 = models.ImageField(upload_to="content/images/", blank=True, null=True, verbose_name="Rasm")
-    video_link1 = models.TextField(default=None, blank=True, null=True, verbose_name="Video havola")
-    video_link2 = models.TextField(default=None, blank=True, null=True, verbose_name="Video havola")
-    video_link3 = models.TextField(default=None, blank=True, null=True, verbose_name="Video havola")
+    video_link = models.TextField( blank=True, null=True, verbose_name="Video havola")
+
 
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, verbose_name="Bo'limni tanlang")
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, verbose_name="Qaysi maqolaga oid agar yangi maqola bo'lsa bo'sh qolsin ")
     
+    def video_links_or_null(self):
+        return {
+            "video_link": self.video_link1 or 'NULL',
 
-    def video_link_or_null(self):
-        return self.video_link or 'NULL'
+        }
+    
     def __str__(self):
         return self.title
 

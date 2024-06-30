@@ -7,6 +7,7 @@ from rest_framework import generics
 from client_panel.models.header import *
 from client_panel.serializers.articleSR import *
 from client_panel.models.category import *
+from rest_framework import status
 
 class ArticleListAPIView(generics.ListAPIView):
     serializer_class = ArticleSerializer
@@ -33,7 +34,8 @@ class ArticleListAPIView(generics.ListAPIView):
         # Ota-onasi bo'lgan maqolalarni filtrlash (ular joylashtirilgan, shuning uchun faqat yuqori darajadagi maqolalar qoladi)
         nested_articles = [article for article in articles_dict.values() if article['parent'] is None]
 
-        return Response(nested_articles)
+        # Response obyektini yaratish va natijani jonatish
+        return Response(nested_articles, status=status.HTTP_200_OK)
     
 
     
