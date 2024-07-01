@@ -6,8 +6,23 @@ from rest_framework import status, permissions
 
 from django.contrib.auth import authenticate
 from client_panel.models import User
+from rest_framework.parsers import FormParser, MultiPartParser
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 
+# -----------------------------register -----------------------------
+
+@swagger_auto_schema(method='post', request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties={
+        'login': openapi.Schema(type=openapi.TYPE_STRING, description='Login username'),
+        'password': openapi.Schema(type=openapi.TYPE_STRING, description='User password'),
+        'password_confirmation': openapi.Schema(type=openapi.TYPE_STRING, description='Password confirmation'),
+        'phone_number': openapi.Schema(type=openapi.TYPE_STRING, description='Phone number'),
+        'file': openapi.Schema(type=openapi.TYPE_FILE, description='File upload')
+    }
+), parser_classes=[MultiPartParser, FormParser])  # swagger uchun
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def register(request):
@@ -39,6 +54,23 @@ def register(request):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # token yaratilmadi
 
 
+# ------------------Login--------------------------------
+@swagger_auto_schema(method='post', request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties={
+        'login': openapi.Schema(type=openapi.TYPE_STRING, description='Login username'),
+        'password': openapi.Schema(type=openapi.TYPE_STRING, description='User password')
+    }
+), responses={
+    200: openapi.Response(description='Successful login', schema=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'token': openapi.Schema(type=openapi.TYPE_STRING, description='Authentication token')
+        }
+    )),
+    400: 'Bad Request',
+    401: 'Unauthorized'
+})
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def log_in(request):
@@ -61,6 +93,16 @@ def log_in(request):
     return Response({'token': token.key}, status=status.HTTP_200_OK)
 
 
+# -----------------------------logout------------------------
+@swagger_auto_schema(method='post', responses={
+    200: openapi.Response(description='Successful logout', schema=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'message': openapi.Schema(type=openapi.TYPE_STRING, description='Logout message')
+        }
+    )),
+    500: 'Internal Server Error'
+})
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])

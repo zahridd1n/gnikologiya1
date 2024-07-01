@@ -48,6 +48,7 @@ class Phone(models.Model):
 class Result(BaseModel):
     name = models.CharField(max_length=200, verbose_name="Natija nomi")
     descriptions = models.TextField(verbose_name="Natija ta'rif")
+    photo = models.ImageField(upload_to="result/photo", verbose_name="Natija rasmi", null=True, blank=True)
 
     class Meta:
         verbose_name = "Natija"
@@ -55,6 +56,7 @@ class Result(BaseModel):
 
 
 class Comment(BaseModel):
+    title = models.CharField(max_length=200, verbose_name="Sharh sarlavhasi",null=True, blank=True)
     photo = models.ImageField(upload_to="comments/photo", verbose_name="Sharh rasmi")
     descriptions = models.TextField(verbose_name="Sharh ta'rif")
 

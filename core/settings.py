@@ -36,12 +36,12 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'ckeditor',
-    'ckeditor_uploader',
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',
     'corsheaders',
+    'ckeditor',
+    'ckeditor_uploader',
 
 ]
 
@@ -57,6 +57,10 @@ CORS_MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'path.to.urls.api_info',  # api_info ning to'liq yo'li
+}
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -80,7 +84,6 @@ DJANGO_MIDDLEWARE = [
 MIDDLEWARE = CORS_MIDDLEWARE + DJANGO_MIDDLEWARE
 
 ROOT_URLCONF = 'core.urls'
-
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
