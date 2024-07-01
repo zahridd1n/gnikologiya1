@@ -33,6 +33,5 @@ class Certificate(models.Model):
         verbose_name = "Sertifikat"
         verbose_name_plural = "Sertifikatlar"
 
-    def __str__(self):
-        return self.image
+
 
