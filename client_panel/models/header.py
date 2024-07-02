@@ -15,11 +15,12 @@ class Logo(BaseModel):
     class Meta:
         verbose_name = "Logo"
         verbose_name_plural = "Logolar"
-
+    
 
 class Social(BaseModel):
-    name = models.CharField(max_length=50, verbose_name="Ijtimoiy tarmoq nomi")
+    icon = models.ImageField(upload_to="logo/image", verbose_name="Social iconini yuklang png holatda")
     link = models.TextField(verbose_name="Ijtimoiy tarmoq havolasi")
+
 
     class Meta:
         verbose_name = "Ijtimoiy tarmoq"
@@ -30,8 +31,7 @@ class Address(models.Model):
     street = models.TextField(verbose_name="Ko'cha nomi")
     longitude = models.CharField(max_length=15,verbose_name="Uzunlik")
     latitude = models.CharField(max_length=15,verbose_name="Kenglik")
-    link = models.CharField(max_length=50, verbose_name="Havola")
-
+   
     class Meta:
         verbose_name = "Manzil"
         verbose_name_plural = "Manzillar"
@@ -73,3 +73,13 @@ class News(BaseModel):
     class Meta:
         verbose_name = "Yangilik"
         verbose_name_plural = "Yangiliklar"
+
+class Services(BaseModel):
+    title = models.CharField(max_length=200, verbose_name="Xizmat sarlavhasi")
+    description = models.TextField(verbose_name="Xizmat matni")
+
+    class Meta:
+        verbose_name = "Xizmat"
+        verbose_name_plural = "Xizmatlar"
+
+        

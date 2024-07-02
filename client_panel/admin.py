@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models.about import *
-from .models.category import *
-from .models.calendar import *
-from .models.about import *
-from .models.header import *
-from .models.user import *
+from client_panel.models.about import *
+from client_panel.models.category import *
+from client_panel.models.calendar import *
+from client_panel.models.about import *
+from client_panel.models.header import *
+from client_panel.models.user import *
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -40,11 +40,11 @@ class LogoAdmin(admin.ModelAdmin):
 
 
 class SocialAdmin(admin.ModelAdmin):
-    list_display = ['name', 'link']
+    list_display = ['icon', 'link']
 
 
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ['street', 'longitude', 'latitude', 'link']
+    list_display = ['street', 'longitude', 'latitude']
 
 
 class PhoneAdmin(admin.ModelAdmin):
@@ -56,7 +56,7 @@ class ResultAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['photo', 'descriptions']
+    list_display = ['descriptions','photo' ]
 
 
 class NewsAdmin(admin.ModelAdmin):
@@ -64,16 +64,31 @@ class NewsAdmin(admin.ModelAdmin):
 
 
 class AboutAdmin(admin.ModelAdmin):
-    list_display = ['name', 'profession', 'description', 'title']
+    list_display = ['name', 'profession', 'description']
 
+
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ['text']
+
+
+class EducationProAdmin(admin.ModelAdmin):
+    list_display = ['text']
+
+class ClinicalAdmin(admin.ModelAdmin):
+    list_display = ['text',"image"]
 
 class ExperienceAdmin(admin.ModelAdmin):
     list_display = ['text']
+
+class CertificateAdmin(admin.ModelAdmin):
+    list_display = ['image',]
 
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ['username', 'phone_number', 'confirm']
 
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ['title', 'description']
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Experience, ExperienceAdmin)
@@ -92,4 +107,10 @@ admin.site.register(Phone, PhoneAdmin)
 admin.site.register(Result, ResultAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(News, NewsAdmin)
-admin.site.register(Certificate)
+admin.site.register(Certificate,CertificateAdmin)
+admin.site.register(Education,EducationAdmin)
+admin.site.register(EducationPro,EducationProAdmin)
+admin.site.register(AboutClinical,ClinicalAdmin)
+admin.site.register(Services,ServiceAdmin)
+
+

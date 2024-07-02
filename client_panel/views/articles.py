@@ -16,7 +16,7 @@ class ArticleListAPIView(generics.ListAPIView):
         # Berilgan sub_category bilan barcha maqolalarni olish
         articles = Article.objects.filter(sub_category=id)
         # Maqolalarni serializatsiya qilish
-        article_serialized = ArticleSerializer(articles, many=True).data
+        article_serialized = ArticleSerializer(articles, many=True, context={'request': request}).data
 
         # Maqolalarni id bo'yicha saqlash uchun lug'at yaratish
         articles_dict = {article['id']: article for article in article_serialized}
@@ -34,12 +34,16 @@ class ArticleListAPIView(generics.ListAPIView):
         # Ota-onasi bo'lgan maqolalarni filtrlash (ular joylashtirilgan, shuning uchun faqat yuqori darajadagi maqolalar qoladi)
         nested_articles = [article for article in articles_dict.values() if article['parent'] is None]
 
-        # Response obyektini yaratish va natijani jonatish
-        return Response(nested_articles, status=status.HTTP_200_OK)
+        response_data = {  # Response obyekti orqali JSON javob qaytarish
+            'success': True,  # Operatsiyaning muvaffaqiyatli ekanligini bildiradi
+            'message': "Success",  # Muvaffaqiyatli xabar
+            'data':nested_articles
+        }
+        return Response(response_data)
     
 
     
-class CategoryView(APIView):
+class NavbarView(APIView):
     category_serializer_class = CategorySerializer
     subcategory_serializer_class = SubCategorySerializer
 
@@ -57,9 +61,14 @@ class CategoryView(APIView):
             serialized_subcategories = self.subcategory_serializer_class(subcategories, many=True).data
             # Kategoriya ma'lumotlariga subkategoriyalarni qo'shish
             category_data['subcategories'] = serialized_subcategories
+        data = serialized_categories
 
-        # Natijani javob sifatida qaytarish
-        return Response(serialized_categories)
+        response_data = {  # Response obyekti orqali JSON javob qaytarish
+            'success': True,  # Operatsiyaning muvaffaqiyatli ekanligini bildiradi
+            'message': "Success",  # Muvaffaqiyatli xabar
+            'data':data
+        }
+        return Response(response_data)
     
     
     

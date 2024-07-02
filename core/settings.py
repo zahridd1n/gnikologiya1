@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
     'ckeditor',
     'ckeditor_uploader',
 
+
 ]
 
 CUSTOM_APPS = [
@@ -79,9 +80,16 @@ DJANGO_MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
+
+
+
 MIDDLEWARE = CORS_MIDDLEWARE + DJANGO_MIDDLEWARE
+
+
+
 
 ROOT_URLCONF = 'core.urls'
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"

@@ -1,0 +1,8 @@
+
+
+
+TAHSIL = "TAHSIL"
+MALAKA = "MALAKA OSHIRISH"
+ISH_TAJRIBASI = "ISH TAJRIBASI"
+
+SERTIFIKAT = "Sertifikat, Litsenziyalar"
