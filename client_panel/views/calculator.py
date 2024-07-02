@@ -7,10 +7,10 @@ class PregnancyDetailView(APIView):
     def get(self, request, *args, **kwargs):
         # Query parametrlarini qabul qilamiz
         lmp_date_str = request.query_params.get('xayz', None)  # '15-03-2023' kabi
-        conception_date_str = request.query_params.get('urug', None)  # '15-03-2023' kabi
+        eku_date_str = request.query_params.get('urug', None)  # '15-03-2023' kabi
 
         # Kamida bittasini kiritganligini tekshiramiz
-        if not lmp_date_str and not conception_date_str:
+        if not lmp_date_str and not eku_date_str:
             return Response({"detail": "Iltimos, yuqoridagi bo'limlardan birini tanlash"}, status=status.HTTP_400_BAD_REQUEST)
 
         # Bugungi kun
@@ -38,9 +38,7 @@ class PregnancyDetailView(APIView):
 
             # LMP asosida tug'ruqqacha qolgan kunlar
             days_left = 280 - delta_days  # 280 = 40 hafta * 7 kun
-            # if days_left < 0:
-            #     return Response({"detail": "Kiritilgan sana noto'g'ri, homiladorlik muddati minus bo'lmasligi kerak."}, status=status.HTTP_400_BAD_REQUEST)
-            due_date = lmp_date + timedelta(days=310)
+            due_date = lmp_date + timedelta(days=280)
 
             results['title'] = f"Tabriklaymiz! Siz homiladorlikning {current_weeks}-haftasidasiz!"
             results['details'] = {
@@ -48,26 +46,24 @@ class PregnancyDetailView(APIView):
             'text2': f"Tug’ruqqacha qolgan kunlar {days_left} kun",
             'text3': f"Taxminiy tug’ruq kuni {due_date.strftime('%Y-%m-%d')}"}
 
-        if conception_date_str:
+        if eku_date_str:
             try:
-                conception_date = datetime.strptime(conception_date_str, '%d-%m-%Y').date()
+                eku_date = datetime.strptime(eku_date_str, '%d-%m-%Y').date()
             except ValueError:
-                return Response({"detail": "Urug'lantirish sanasi formati noto'g'ri. To'g'ri format: DD-MM-YYYY."}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"detail": "EKU qilingan kun formati noto'g'ri. To'g'ri format: DD-MM-YYYY."}, status=status.HTTP_400_BAD_REQUEST)
             
             # Sana tekshiruvi
-            if conception_date < max_past_date:
-                return Response({"detail": "Urug'lantirish sanasi bugungi kundan 10 oy orqadan ko'p bo'lmasligi kerak."}, status=status.HTTP_400_BAD_REQUEST)
+            if eku_date < max_past_date:
+                return Response({"detail": "EKU qilingan kun bugungi kundan 10 oy orqadan ko'p bo'lmasligi kerak."}, status=status.HTTP_400_BAD_REQUEST)
 
-            # Urug'lantirish sanasi asosida homiladorlik muddatini hisoblash
-            delta_days = (today - conception_date).days
-            current_weeks = delta_days // 7
+            # EKU qilingan sana asosida homiladorlik muddatini hisoblash
+            delta_days = (today - eku_date).days
+            current_weeks = (delta_days // 7) + 2  # EKU sanasiga 2 hafta qo'shamiz
             current_days = delta_days % 7
 
-            # Urug'lantirish sanasi asosida tug'ruqqacha qolgan kunlar
+            # EKU qilingan sana asosida tug'ruqqacha qolgan kunlar
             days_left = 266 - delta_days  # 266 = 38 hafta * 7 kun
-            # if days_left < 0:
-            #     return Response({"detail": "Kiritilgan sana noto'g'ri, homiladorlik muddati minus bo'lmasligi kerak."}, status=status.HTTP_400_BAD_REQUEST)
-            due_date = conception_date + timedelta(days=266)
+            due_date = eku_date + timedelta(days=266)
 
             results['title'] = f"Tabriklaymiz! Siz homiladorlikning {current_weeks}-haftasidasiz!"
             results['details'] = {
