@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FARGENIUS GROUP</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{% static 'vaqtinchalik/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .logo img {
+      width: 500px; /* Logotipning kengligi */
+      height: auto; /* Avtomatik o'lchamlash */
+      /* border-radius: 50%; Hiralashtirish uchun radius */
+      /* border: 2px solid #fff; Hiralashtirish uchun chiziq rangi */
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); Hiralashtirish uchun qorong'i */
+    }
+
+    .header {
+      margin-top: 300px;
+      text-align: center;
+    }
+
+    .social-icons {
+      text-align: center;
+      margin-top: 20px; /* Yerga joylashishni o'zgartiring */
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin: 0 10px; /* Iconlar orasidagi bo'shliqni o'zgartiring */
+      font-size: 30px; /* Iconlar o'lchamini o'zgartiring */
+      color: #333; /* Icon rangini o'zgartiring */
+    }
+
+    .info {
+      /* background-color: #f0f0f0; Fondo rangini o'zgartiring */
+      padding: 20px; /* Harakatlar orasidagi bo'shliqni o'zgartiring */
+      margin-top: 50px; /* Yerga joylashishni o'zgartiring */
+      text-align: center; /* Matnni markazga joylashtirish */
+      font-size: 24px; /* Matn o'lchamini o'zgartiring */
+      line-height: 1.2; /* Qatlar orasidagi masofani o'zgartiring */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <img src="{% static 'vaqtinchalik/logo.png' %}" alt="Fargenius Group Logo">
+  </div>
+
+  <div class="header">
+    <h1>FARGENIUS <br> GROUP</h1>
+  </div>
+
+  <div class="cloak__wrapper">
+    <div class="cloak__container">
+      <div class="cloak"></div>
+    </div>
+  </div>
+
+  <div class="info">
+    <h2>SAYT FAOLIYATI HOZIRDA TAKOMILLASHTIRILMOQDA</h2>
+    <p>
+      Ushbu sayt <strong>FARGENIUS GROUP</strong> tomonidan ishlab chiqilmoqda. Tez orada mukammal va faoliyatga tayyor saytni kutib olasiz.
+    </p>
+    <div class="social-icons">
+      <a href="https://t.me/fargenius_admin" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
+      <a href="https://www.instagram.com/fargenius_group/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+998916624222" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+
+  <script src="{% static 'vaqtinchalik/script.js' %}"></script>
+</body>
+</html>
