@@ -5,6 +5,7 @@ from client_panel.models.calendar import *
 from client_panel.models.about import *
 from client_panel.models.header import *
 from client_panel.models.user import *
+from client_panel.models.booking import *
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -56,7 +57,7 @@ class ResultAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['descriptions','photo' ]
+    list_display = ['descriptions', 'photo']
 
 
 class NewsAdmin(admin.ModelAdmin):
@@ -74,21 +75,30 @@ class EducationAdmin(admin.ModelAdmin):
 class EducationProAdmin(admin.ModelAdmin):
     list_display = ['text']
 
+
 class ClinicalAdmin(admin.ModelAdmin):
-    list_display = ['text',"image"]
+    list_display = ['text', "image"]
+
 
 class ExperienceAdmin(admin.ModelAdmin):
     list_display = ['text']
 
+
 class CertificateAdmin(admin.ModelAdmin):
-    list_display = ['image',]
+    list_display = ['image', ]
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'phone_number', 'confirm']
+    list_display = ['username', 'phone_number', 'confirm', "is_staff"]
+
 
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['title', 'description']
+
+
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ['full_name', 'phone_number']
+
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Experience, ExperienceAdmin)
@@ -107,10 +117,9 @@ admin.site.register(Phone, PhoneAdmin)
 admin.site.register(Result, ResultAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(News, NewsAdmin)
-admin.site.register(Certificate,CertificateAdmin)
-admin.site.register(Education,EducationAdmin)
-admin.site.register(EducationPro,EducationProAdmin)
-admin.site.register(AboutClinical,ClinicalAdmin)
-admin.site.register(Services,ServiceAdmin)
-
-
+admin.site.register(Certificate, CertificateAdmin)
+admin.site.register(Education, EducationAdmin)
+admin.site.register(EducationPro, EducationProAdmin)
+admin.site.register(AboutClinical, ClinicalAdmin)
+admin.site.register(Services, ServiceAdmin)
+admin.site.register(Booking, BookingAdmin)

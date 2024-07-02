@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+from django.utils.timezone import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,7 +43,6 @@ THIRD_PARTY_APPS = [
     'ckeditor',
     'ckeditor_uploader',
 
-
 ]
 
 CUSTOM_APPS = [
@@ -69,9 +68,19 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWTAuthentication ni qo'shish
+        'rest_framework.authentication.BasicAuthentication',
     ],
 
 }
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
+
 DJANGO_MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,13 +92,7 @@ DJANGO_MIDDLEWARE = [
 
 ]
 
-
-
-
 MIDDLEWARE = CORS_MIDDLEWARE + DJANGO_MIDDLEWARE
-
-
-
 
 ROOT_URLCONF = 'core.urls'
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
